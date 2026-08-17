@@ -112,12 +112,7 @@ export function Footer() {
             </span>
             <span>Analytics Infrastructure: 100% Operational</span>
           </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/60 border border-purple-300 dark:border-purple-800 text-purple-950 dark:text-purple-200 font-medium text-[11px]">
-              <Sparkles className="w-3 h-3 text-purple-600 dark:text-purple-400" />
-              <span>Developed &amp; Designed by <strong className="font-bold text-purple-700 dark:text-purple-300">Santhosh Raj K</strong></span>
-            </div>
+          <div>
             <span>© {new Date().getFullYear()} {PERSONAL_INFO.name}. All rights reserved.</span>
           </div>
         </div>

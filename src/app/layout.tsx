@@ -36,9 +36,9 @@ export const metadata: Metadata = {
     "ETL",
     "Data Validation",
   ],
-  authors: [{ name: "Indhu S" }, { name: "Santhosh RJ K" }],
-  creator: "Santhosh Raj K",
-  publisher: "Santhosh Raj K",
+  authors: [{ name: "Indhu S" }],
+  creator: "Indhu S",
+  publisher: "Indhu S",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
