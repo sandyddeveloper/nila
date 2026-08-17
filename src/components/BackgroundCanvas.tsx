@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 
 interface Particle {
@@ -16,8 +16,15 @@ interface Particle {
 export function BackgroundCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -124,13 +131,16 @@ export function BackgroundCanvas() {
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [resolvedTheme]);
+  }, [mounted, resolvedTheme]);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-700"
-      style={{ opacity: resolvedTheme === "dark" ? 0.85 : 0.55 }}
+      className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-700 opacity-60 dark:opacity-85"
     />
   );
 }
