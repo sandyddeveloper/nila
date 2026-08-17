@@ -10,6 +10,9 @@ import {
   ShieldAlert,
   CheckCircle2,
   RefreshCw,
+  Download,
+  FileSpreadsheet,
+  Layers,
 } from "lucide-react";
 import {
   AreaChart,
@@ -126,17 +129,40 @@ export function DataSandbox() {
     <section id="sandbox" className="py-24 relative bg-purple-50/40 dark:bg-purple-950/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-100 dark:bg-purple-900/60 border border-purple-300 dark:border-purple-800 text-purple-900 dark:text-purple-200">
             <Sparkles className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
             <span>Interactive Data Simulation Engine</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-purple-950 dark:text-white tracking-tight">
-            Customer Retention & Lifetime Value (LTV) Simulator
+            Customer Retention &amp; Lifetime Value (LTV) Simulator
           </h2>
           <p className="text-sm sm:text-base text-purple-900/70 dark:text-purple-300/80">
             Test how predictive churn modeling and proactive interventions directly impact enterprise revenue. Adjust the live parameters below to simulate your organization&apos;s data trajectory.
           </p>
+
+          {/* Attached Dataset Download Bar */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="/customer_retention_ltv_dataset.xlsx"
+              download="customer_retention_ltv_dataset.xlsx"
+              className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center gap-2 shadow-md hover:scale-102"
+            >
+              <FileSpreadsheet className="w-4 h-4" />
+              <span>Download Retention &amp; LTV Dataset (.xlsx)</span>
+              <Download className="w-3.5 h-3.5 opacity-80" />
+            </a>
+
+            <a
+              href="/retail_sales_telemetry.xlsx"
+              download="retail_sales_telemetry.xlsx"
+              className="px-4 py-2 rounded-xl text-xs font-semibold glass-card text-purple-950 dark:text-purple-200 hover:bg-purple-100 dark:hover:bg-purple-900/50 border border-purple-200 dark:border-purple-800 transition-all flex items-center gap-2 shadow-sm"
+            >
+              <FileSpreadsheet className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+              <span>Download Sales Telemetry Dataset (.xlsx)</span>
+              <Download className="w-3.5 h-3.5 opacity-70" />
+            </a>
+          </div>
         </div>
 
         {/* Preset Selector */}
@@ -297,6 +323,21 @@ export function DataSandbox() {
                 <span>45% (High AI Lift)</span>
               </div>
             </div>
+
+            {/* Excel Model Info Box */}
+            <div className="p-4 rounded-2xl bg-purple-100/60 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800/60 space-y-1.5 text-xs">
+              <div className="font-bold text-purple-950 dark:text-white flex items-center gap-1.5">
+                <FileSpreadsheet className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <span>Underlying Excel Mathematical Model</span>
+              </div>
+              <p className="text-[11px] text-purple-900/80 dark:text-purple-300/80 leading-relaxed">
+                Formulas from <code className="font-mono text-purple-700 dark:text-purple-300">customer_retention_ltv_dataset.xlsx</code>:
+                <br />
+                • <span className="font-mono text-[10px]">Saved ARR = (Users × Churn% × Gain%) × ARPU × 12</span>
+                <br />
+                • <span className="font-mono text-[10px]">LTV = ARPU / Monthly Churn%</span>
+              </p>
+            </div>
           </div>
 
           {/* Right Analytical Results & Live Chart Panel */}
@@ -390,7 +431,7 @@ export function DataSandbox() {
                       formatter={(value: any, name: any) => [
                         `$${formatNumber(Number(value))}k`,
                         name === "optimizedARR"
-                          ? "With INDHU S Pipeline"
+                          ? "With Indhu S Analytics Pipeline"
                           : "Baseline Unmanaged Churn",
                       ]}
                       contentStyle={{
@@ -406,7 +447,7 @@ export function DataSandbox() {
                       formatter={(value) => (
                         <span className="text-xs text-purple-900 dark:text-purple-200 font-medium">
                           {value === "optimizedARR"
-                            ? "Optimized ARR (INDHU S Analytics Pipeline)"
+                            ? "Optimized ARR (Indhu S Analytics Pipeline)"
                             : "Status Quo ARR (Unmanaged Churn)"}
                         </span>
                       )}

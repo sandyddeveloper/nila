@@ -92,7 +92,7 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-600"></span>
               </span>
-              <span>Available for Senior Data Analyst & BI Roles</span>
+              <span>Available for Data Analyst &amp; BI Roles</span>
               <Sparkles className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 ml-0.5" />
             </div>
 
@@ -104,31 +104,31 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-purple-950 dark:text-white leading-[1.12]">
                 Transforming{" "}
                 <span className="bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-500 dark:from-purple-400 dark:via-purple-300 dark:to-indigo-300 bg-clip-text text-transparent">
-                  Complex Data
+                  Raw Datasets
                 </span>{" "}
-                into Actionable Business Intelligence.
+                into Powerful Visual Insights &amp; KPI Dashboards.
               </h1>
             </div>
 
             {/* Sub-paragraph */}
             <p className="text-base sm:text-lg text-purple-900/80 dark:text-purple-200/80 max-w-2xl leading-relaxed">
-              Senior Data Analyst specializing in{" "}
+              Data Analyst with proven experience in{" "}
               <strong className="font-semibold text-purple-950 dark:text-white">
-                SQL Data Warehousing
+                Python (Pandas, NumPy, Matplotlib)
               </strong>
               ,{" "}
               <strong className="font-semibold text-purple-950 dark:text-white">
-                Python Machine Learning
+                SQL (MySQL, PostgreSQL)
               </strong>
               ,{" "}
               <strong className="font-semibold text-purple-950 dark:text-white">
-                Power BI & Tableau
+                Power BI (DAX, Power Query)
               </strong>
               , and{" "}
               <strong className="font-semibold text-purple-950 dark:text-white">
-                Bayesian A/B Experimentation
+                Advanced Excel &amp; Data Validation
               </strong>
-              . Delivering quantifiable ROI and predictive decision clarity.
+              . Experienced in high-accuracy data conversion, ETL pipelines, and executive KPI reporting at HTC Global Services.
             </p>
 
             {/* CTAs */}
@@ -162,9 +162,9 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
             <div className="pt-4 border-t border-purple-200/70 dark:border-purple-900/40 flex flex-wrap items-center gap-2 text-xs text-purple-800 dark:text-purple-300 font-medium">
               <span className="font-semibold text-purple-950 dark:text-purple-100 mr-1 flex items-center gap-1">
                 <Database className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-                Tech Stack:
+                Core Stack:
               </span>
-              {["SQL", "Python", "Power BI", "Snowflake", "dbt", "Tableau", "XGBoost", "A/B Testing"].map(
+              {["Python", "Pandas", "SQL", "MySQL", "PostgreSQL", "Power BI", "DAX", "Power Query", "Excel (VLOOKUP, Macros)", "Django", "Git"].map(
                 (tool) => (
                   <span
                     key={tool}

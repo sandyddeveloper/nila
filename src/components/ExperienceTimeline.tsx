@@ -27,7 +27,7 @@ export function ExperienceTimeline() {
             Work Experience & Education
           </h2>
           <p className="text-sm sm:text-base text-purple-900/70 dark:text-purple-300/80">
-            A proven career progression delivering data-driven transformation across high-growth enterprise tech and analytics environments.
+            Professional data QA & conversion experience at HTC Global Services, combined with computer applications academic background.
           </p>
         </div>
 
@@ -77,7 +77,7 @@ export function ExperienceTimeline() {
                     {/* Achievements */}
                     <div className="space-y-2">
                       <div className="text-xs font-bold uppercase tracking-wider text-purple-800 dark:text-purple-300">
-                        Key Accomplishments & Quantified Impact
+                        Key Responsibilities & Quality Deliverables
                       </div>
                       <ul className="space-y-2 text-xs sm:text-sm text-purple-950/90 dark:text-purple-100">
                         {exp.achievements.map((ach, aIdx) => (
@@ -115,26 +115,26 @@ export function ExperienceTimeline() {
                 <span>Education</span>
               </h3>
 
-              {RESUME_DATA.education.map((edu, idx) => (
-                <div key={idx} className="space-y-2 pb-2">
-                  <h4 className="text-sm font-bold text-purple-950 dark:text-white">
-                    {edu.degree}
-                  </h4>
-                  <div className="text-xs font-semibold text-purple-600 dark:text-purple-400">
-                    {edu.institution}
+              <div className="space-y-4">
+                {RESUME_DATA.education.map((edu, idx) => (
+                  <div key={idx} className="space-y-1 pb-3 border-b border-purple-100 dark:border-purple-900/40 last:border-0 last:pb-0">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-sm font-bold text-purple-950 dark:text-white">
+                        {edu.degree}
+                      </h4>
+                      <span className="font-bold text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded-md">
+                        {edu.grade}
+                      </span>
+                    </div>
+                    <div className="text-xs font-semibold text-purple-600 dark:text-purple-400">
+                      {edu.institution}
+                    </div>
+                    <div className="text-[11px] text-purple-700 dark:text-purple-300">
+                      {edu.period}
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 text-[11px] text-purple-700 dark:text-purple-300">
-                    <span>{edu.period}</span>
-                    <span>•</span>
-                    <span className="font-bold text-emerald-600 dark:text-emerald-400">
-                      {edu.grade}
-                    </span>
-                  </div>
-                  <p className="text-xs text-purple-900/70 dark:text-purple-300/70 pt-1">
-                    <strong>Focus:</strong> {edu.coursework}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             {/* Core Competencies Card */}

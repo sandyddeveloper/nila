@@ -14,6 +14,7 @@ import {
   Layers,
   ArrowUpRight,
   Sparkles,
+  Download,
 } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -441,6 +442,33 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </div>
               </div>
 
+              {project.datasetFile && (
+                <div className="p-5 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/70 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-600 text-white">
+                        ATTACHED DATASET
+                      </span>
+                      <span className="text-xs font-bold text-emerald-950 dark:text-emerald-200">
+                        retail_sales_telemetry.xlsx
+                      </span>
+                    </div>
+                    <p className="text-xs text-emerald-900/80 dark:text-emerald-300/80">
+                      Official sales dataset utilized in this exploratory analysis with 120k+ multi-category records.
+                    </p>
+                  </div>
+
+                  <a
+                    href={project.datasetFile}
+                    download="retail_sales_telemetry.xlsx"
+                    className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center gap-2 shadow-md shrink-0"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download Excel (.xlsx)</span>
+                  </a>
+                </div>
+              )}
+
               <div>
                 <h4 className="text-xs font-bold text-purple-950 dark:text-white uppercase tracking-wider mb-2">
                   Tools & Technologies Used
@@ -461,16 +489,29 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         </div>
 
         {/* Modal Footer */}
-        <div className="p-4 sm:p-6 bg-purple-50/60 dark:bg-purple-950/50 border-t border-purple-200 dark:border-purple-800/60 flex items-center justify-between">
+        <div className="p-4 sm:p-6 bg-purple-50/60 dark:bg-purple-950/50 border-t border-purple-200 dark:border-purple-800/60 flex flex-wrap items-center justify-between gap-3">
           <div className="text-xs text-purple-600 dark:text-purple-400">
-            Engineered by <strong className="font-semibold text-purple-950 dark:text-white">INDHU S</strong>
+            Engineered by <strong className="font-semibold text-purple-950 dark:text-white">Indhu S</strong>
           </div>
-          <button
-            onClick={onClose}
-            className="px-5 py-2 rounded-xl text-xs font-bold bg-purple-600 text-white hover:bg-purple-700 transition-colors shadow-sm"
-          >
-            Close Details
-          </button>
+
+          <div className="flex items-center gap-2">
+            {project.datasetFile && (
+              <a
+                href={project.datasetFile}
+                download="retail_sales_telemetry.xlsx"
+                className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-colors flex items-center gap-1.5 shadow-sm"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Download Dataset (.xlsx)</span>
+              </a>
+            )}
+            <button
+              onClick={onClose}
+              className="px-5 py-2 rounded-xl text-xs font-bold bg-purple-600 text-white hover:bg-purple-700 transition-colors shadow-sm"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>

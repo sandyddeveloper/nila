@@ -14,6 +14,8 @@ import {
   Clock,
   Layers,
   ChevronRight,
+  Download,
+  FileSpreadsheet,
 } from "lucide-react";
 
 export function CodeLab() {
@@ -43,17 +45,30 @@ export function CodeLab() {
     <section id="codelab" className="py-24 relative bg-purple-50/30 dark:bg-purple-950/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-100 dark:bg-purple-900/60 border border-purple-300 dark:border-purple-800 text-purple-900 dark:text-purple-200">
             <Terminal className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-            <span>Interactive SQL & Data Console</span>
+            <span>Interactive SQL &amp; Data Console</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-purple-950 dark:text-white tracking-tight">
             Live Analytical Query Console
           </h2>
           <p className="text-sm sm:text-base text-purple-900/70 dark:text-purple-300/80">
-            Explore and execute real production-grade SQL scripts written by INDHU S for customer intelligence, retention cohorts, and risk scoring.
+            Explore and execute real production-grade SQL scripts written by Indhu S for financial KPIs, data migration QA checks, and regional sales analytics.
           </p>
+
+          {/* Direct Dataset Download Action */}
+          <div className="pt-2 flex justify-center">
+            <a
+              href="/sql_query_analytics_dataset.xlsx"
+              download="sql_query_analytics_dataset.xlsx"
+              className="px-4 py-2 rounded-xl text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition-all flex items-center gap-2 shadow-md hover:scale-102"
+            >
+              <FileSpreadsheet className="w-4 h-4" />
+              <span>Download SQL Query Dataset (.xlsx)</span>
+              <Download className="w-3.5 h-3.5 opacity-80" />
+            </a>
+          </div>
         </div>
 
         {/* Console Container */}
@@ -79,7 +94,7 @@ export function CodeLab() {
                   }}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
                     selectedScenario.id === scenario.id
-                      ? "bg-purple-600 text-white shadow-sm"
+                      ? "bg-purple-600 text-white shadow-sm scale-102"
                       : "bg-white/80 dark:bg-purple-900/40 text-purple-950 dark:text-purple-200 hover:bg-purple-200/60 dark:hover:bg-purple-800/50"
                   }`}
                 >
@@ -117,9 +132,9 @@ export function CodeLab() {
               </div>
 
               {/* Action Bar */}
-              <div className="pt-4 mt-4 border-t border-purple-900/40 flex items-center justify-between">
+              <div className="pt-4 mt-4 border-t border-purple-900/40 flex flex-wrap items-center justify-between gap-2">
                 <span className="text-[11px] text-purple-400 font-mono">
-                  Engine: PostgreSQL 16 (Simulated)
+                  Schema: <code className="text-purple-300 font-bold">{selectedScenario.category}</code>
                 </span>
                 <button
                   onClick={handleRunQuery}
@@ -127,7 +142,7 @@ export function CodeLab() {
                   className="px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-md shadow-purple-600/30 flex items-center gap-2 transition-all active:scale-95 disabled:opacity-50"
                 >
                   <Play className={`w-3.5 h-3.5 ${isExecuting ? "animate-spin" : ""}`} />
-                  <span>{isExecuting ? "Executing..." : "Execute Query"}</span>
+                  <span>{isExecuting ? "Executing Query..." : "Execute Query"}</span>
                 </button>
               </div>
             </div>
@@ -138,52 +153,55 @@ export function CodeLab() {
                 {/* Stats Bar */}
                 <div className="flex items-center justify-between pb-3 mb-3 border-b border-purple-100 dark:border-purple-900/50">
                   <div className="flex items-center gap-2">
-                    <span className="relative flex h-2 w-2">
+                    <span className="flex h-2 w-2 relative">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                     </span>
-                    <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wide">
-                      Query Success
+                    <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                      QUERY OK
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-3 text-xs text-purple-600 dark:text-purple-400 font-mono">
+                  <div className="flex items-center gap-3 text-[11px] font-mono text-purple-800 dark:text-purple-300">
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
+                      <Clock className="w-3 h-3 text-purple-500" />
                       {selectedScenario.executionTime}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Layers className="w-3 h-3" />
-                      {selectedScenario.rowsMatched} rows returned
-                    </span>
+                    <span>•</span>
+                    <span>{selectedScenario.rowsMatched} rows returned</span>
                   </div>
                 </div>
 
-                {/* Table Output */}
-                {hasExecuted ? (
-                  <div className="overflow-x-auto border border-purple-200 dark:border-purple-800/60 rounded-2xl">
+                {/* Scenario Description */}
+                <p className="text-xs text-purple-900/80 dark:text-purple-300/80 mb-3">
+                  {selectedScenario.description}
+                </p>
+
+                {/* Output Data Table */}
+                <div className="rounded-2xl border border-purple-200 dark:border-purple-800/60 overflow-hidden shadow-sm bg-purple-50/30 dark:bg-purple-950/20">
+                  <div className="overflow-x-auto max-h-56">
                     <table className="w-full text-left text-xs font-mono">
-                      <thead className="bg-purple-100/60 dark:bg-purple-950/60 text-purple-950 dark:text-purple-200 uppercase text-[10px] border-b border-purple-200 dark:border-purple-800/60">
+                      <thead className="bg-purple-100/80 dark:bg-purple-950/80 text-purple-950 dark:text-purple-200 uppercase text-[10px] tracking-wider sticky top-0 border-b border-purple-200 dark:border-purple-800">
                         <tr>
                           {selectedScenario.columns.map((col) => (
-                            <th key={col} className="p-2.5 font-bold">
+                            <th key={col} className="py-2.5 px-3 whitespace-nowrap">
                               {col}
                             </th>
                           ))}
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-purple-100 dark:divide-purple-900/40">
+                      <tbody className="divide-y divide-purple-100 dark:divide-purple-900/40 text-purple-950 dark:text-purple-200">
                         {selectedScenario.results.map((row, idx) => (
                           <tr
                             key={idx}
-                            className="hover:bg-purple-50/50 dark:hover:bg-purple-900/30 transition-colors"
+                            className="hover:bg-purple-100/50 dark:hover:bg-purple-900/30 transition-colors"
                           >
                             {selectedScenario.columns.map((col) => (
                               <td
                                 key={col}
-                                className="p-2.5 text-purple-900 dark:text-purple-200 whitespace-nowrap"
+                                className="py-2 px-3 whitespace-nowrap text-[11px]"
                               >
-                                {row[col]}
+                                {String(row[col])}
                               </td>
                             ))}
                           </tr>
@@ -191,20 +209,14 @@ export function CodeLab() {
                       </tbody>
                     </table>
                   </div>
-                ) : (
-                  <div className="h-48 flex items-center justify-center text-xs text-purple-400">
-                    Executing analytical pipeline on simulated warehouse cluster...
-                  </div>
-                )}
+                </div>
               </div>
 
-              {/* Business Insight Takeaway Card */}
-              <div className="p-3.5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 text-xs text-purple-900 dark:text-purple-200 flex items-start gap-2.5">
+              {/* Bottom Insight Pill */}
+              <div className="pt-3 border-t border-purple-100 dark:border-purple-900/50 flex items-start gap-2 text-xs text-purple-900 dark:text-purple-200 bg-purple-50 dark:bg-purple-950/50 p-3 rounded-xl border border-purple-200/50 dark:border-purple-800/40">
                 <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="font-bold text-purple-950 dark:text-white">
-                    Business Analytics Insight:
-                  </strong>{" "}
+                  <strong className="text-purple-950 dark:text-white">Business Insight:</strong>{" "}
                   {selectedScenario.insight}
                 </div>
               </div>

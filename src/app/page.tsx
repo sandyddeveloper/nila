@@ -52,7 +52,7 @@ export default function HomePage() {
       <Certifications />
 
       {/* Stakeholder Testimonials */}
-      <Testimonials />
+      {/* <Testimonials /> */}
 
       {/* Contact & Collaboration Section */}
       <ContactSection />

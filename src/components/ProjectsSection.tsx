@@ -12,6 +12,7 @@ import {
   BarChart2,
   Search,
   Filter,
+  Download,
 } from "lucide-react";
 
 export function ProjectsSection() {
@@ -21,10 +22,8 @@ export function ProjectsSection() {
 
   const categories = [
     "All",
-    "Python & ML",
-    "SQL & Warehousing",
     "Power BI & Tableau",
-    "A/B Testing & Stats",
+    "Python",
   ];
 
   const filteredProjects = PROJECTS.filter((p) => {
@@ -44,29 +43,28 @@ export function ProjectsSection() {
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-100 dark:bg-purple-900/60 border border-purple-300 dark:border-purple-800 text-purple-900 dark:text-purple-200">
             <FolderGit2 className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-            <span>Featured Case Studies & Work</span>
+            <span>Featured Case Studies &amp; Work</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-purple-950 dark:text-white tracking-tight">
-            Data Analytics & BI Portfolio
+            Featured Analytics Projects
           </h2>
           <p className="text-sm sm:text-base text-purple-900/70 dark:text-purple-300/80">
-            Production-grade data pipelines, machine learning models, and executive business intelligence dashboards built to solve high-stakes business challenges.
+            Data analysis, exploratory modeling, and executive business intelligence dashboards engineered using Python, SQL, Excel, and Power BI.
           </p>
         </div>
 
         {/* Filter Controls & Search */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 max-w-5xl mx-auto">
           {/* Category Tabs */}
           <div className="flex flex-wrap items-center gap-2 p-1.5 rounded-2xl bg-purple-100/70 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-800/60">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${
-                  selectedCategory === cat
+                className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 ${selectedCategory === cat
                     ? "bg-purple-600 text-white shadow-md shadow-purple-600/30 scale-102"
                     : "text-purple-950/80 dark:text-purple-200 hover:text-purple-600 dark:hover:text-white hover:bg-purple-200/50 dark:hover:bg-purple-900/40"
-                }`}
+                  }`}
               >
                 {cat}
               </button>
@@ -87,7 +85,7 @@ export function ProjectsSection() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {filteredProjects.map((project) => (
             <div
               key={project.id}
@@ -123,9 +121,22 @@ export function ProjectsSection() {
                     <Database className="w-3 h-3 text-purple-600 dark:text-purple-400" />
                     {project.dataset.records}
                   </span>
-                  <span className="text-purple-600 dark:text-purple-400 text-[10px]">
-                    {project.dataset.source.split(" ")[0]}
-                  </span>
+                  {project.datasetFile ? (
+                    <a
+                      href={project.datasetFile}
+                      download="retail_sales_telemetry.xlsx"
+                      onClick={(e) => e.stopPropagation()}
+                      className="px-2.5 py-1 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 font-bold text-[10px] flex items-center gap-1 hover:bg-emerald-200 dark:hover:bg-emerald-900 transition-colors border border-emerald-300 dark:border-emerald-700/60 shadow-xs"
+                      title="Download Attached Excel Dataset"
+                    >
+                      <Download className="w-3 h-3" />
+                      <span>Dataset (.xlsx)</span>
+                    </a>
+                  ) : (
+                    <span className="text-purple-600 dark:text-purple-400 text-[10px]">
+                      {project.dataset.source.split(" ")[0]}
+                    </span>
+                  )}
                 </div>
 
                 {/* Tech tags */}
