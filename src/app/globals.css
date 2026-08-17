@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --background: #faf8ff;
+    --foreground: #1e1035;
+    
+    --card: #ffffff;
+    --card-foreground: #1e1035;
+    
+    --primary: #7e22ce;
+    --primary-foreground: #ffffff;
+    --primary-hover: #6b21a8;
+    
+    --secondary: #f3e8ff;
+    --secondary-foreground: #581c87;
+    
+    --muted: #f5f0ff;
+    --muted-foreground: #475569;
+    
+    --accent: #e9d5ff;
+    --accent-foreground: #3b0764;
+    
+    --border: #e9d5ff;
+    --border-subtle: #d8b4fe;
+    --input: #ffffff;
+    --ring: #9333ea;
+    
+    --glow-color: rgba(147, 51, 234, 0.12);
+    --grid-color: rgba(126, 34, 206, 0.06);
+  }
+
+  .dark {
+    --background: #090514;
+    --foreground: #f5f3ff;
+    
+    --card: #120b24;
+    --card-foreground: #f5f3ff;
+    
+    --primary: #c084fc;
+    --primary-foreground: #0f0728;
+    --primary-hover: #d8b4fe;
+    
+    --secondary: #1a0f35;
+    --secondary-foreground: #e9d5ff;
+    
+    --muted: #1c133a;
+    --muted-foreground: #94a3b8;
+    
+    --accent: #2e1065;
+    --accent-foreground: #f3e8ff;
+    
+    --border: #2c194d;
+    --border-subtle: #3b1e6d;
+    --input: #231240;
+    --ring: #c084fc;
+    
+    --glow-color: rgba(192, 132, 252, 0.22);
+    --grid-color: rgba(168, 85, 247, 0.07);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
+}
+
+/* Custom Purple Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: #a855f7;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9333ea;
+}
+
+/* Glassmorphism & Solid Card Classes */
+.glass-card {
+  background: #ffffff;
+  border: 1px solid #e9d5ff;
+  box-shadow: 0 4px 20px -2px rgba(126, 34, 206, 0.06);
+}
+
+.dark .glass-card {
+  background: rgba(18, 11, 36, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(168, 85, 247, 0.22);
+  box-shadow: 0 4px 25px -2px rgba(0, 0, 0, 0.5);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #e9d5ff;
+}
+
+.dark .glass-nav {
+  background: rgba(9, 5, 20, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.18);
+}
+
+/* Ambient Purple Glow & Shadows */
+.purple-glow {
+  box-shadow: 0 0 35px -8px var(--glow-color);
+}
+
+.purple-glow-lg {
+  box-shadow: 0 0 55px -12px var(--glow-color);
+}
+
+.purple-border-glow {
+  box-shadow: 0 0 20px -3px rgba(147, 51, 234, 0.25);
+}
+
+.dark .purple-border-glow {
+  box-shadow: 0 0 20px -3px rgba(168, 85, 247, 0.35);
+}
+
+/* Animated Data Mesh Grid Background */
+.bg-data-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+}
+
+.bg-radial-gradient {
+  background: radial-gradient(circle at 50% 15%, rgba(147, 51, 234, 0.08), transparent 65%);
+}
+
+.dark .bg-radial-gradient {
+  background: radial-gradient(circle at 50% 15%, rgba(168, 85, 247, 0.22), transparent 75%);
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.5s infinite;
+}
+
+/* Pulse Glow */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Smooth code block style */
+pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
