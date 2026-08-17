@@ -16,6 +16,7 @@ import {
   ChevronRight,
   Download,
   FileSpreadsheet,
+  Cpu,
 } from "lucide-react";
 
 export function CodeLab() {
@@ -23,16 +24,15 @@ export function CodeLab() {
     QUERY_SCENARIOS[0]
   );
   const [isExecuting, setIsExecuting] = useState(false);
-  const [hasExecuted, setHasExecuted] = useState(true);
+  const [executionCount, setExecutionCount] = useState(1);
   const [copied, setCopied] = useState(false);
 
   const handleRunQuery = () => {
     setIsExecuting(true);
-    setHasExecuted(false);
     setTimeout(() => {
       setIsExecuting(false);
-      setHasExecuted(true);
-    }, 450);
+      setExecutionCount((prev) => prev + 1);
+    }, 550);
   };
 
   const handleCopy = () => {
@@ -90,7 +90,7 @@ export function CodeLab() {
                   key={scenario.id}
                   onClick={() => {
                     setSelectedScenario(scenario);
-                    setHasExecuted(true);
+                    setExecutionCount((prev) => prev + 1);
                   }}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
                     selectedScenario.id === scenario.id
@@ -105,9 +105,12 @@ export function CodeLab() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12">
-            {/* Left: Code Editor Window */}
-            <div className="lg:col-span-6 p-6 bg-[#0c061a] border-b lg:border-b-0 lg:border-r border-purple-900/50 flex flex-col justify-between">
-              <div className="space-y-3">
+            {/* Left: Code Editor Window with Scanning Laser Beam */}
+            <div className="relative lg:col-span-6 p-6 bg-[#0c061a] border-b lg:border-b-0 lg:border-r border-purple-900/50 flex flex-col justify-between overflow-hidden">
+              {/* Animated Laser Scanning Beam on execution */}
+              {isExecuting && <div className="animate-scanline" />}
+
+              <div className="space-y-3 relative z-10">
                 <div className="flex items-center justify-between pb-3 border-b border-purple-900/40">
                   <div className="flex items-center gap-2 text-xs text-purple-300 font-mono">
                     <Database className="w-3.5 h-3.5 text-purple-400" />
@@ -132,8 +135,9 @@ export function CodeLab() {
               </div>
 
               {/* Action Bar */}
-              <div className="pt-4 mt-4 border-t border-purple-900/40 flex flex-wrap items-center justify-between gap-2">
-                <span className="text-[11px] text-purple-400 font-mono">
+              <div className="pt-4 mt-4 border-t border-purple-900/40 flex flex-wrap items-center justify-between gap-2 relative z-10">
+                <span className="text-[11px] text-purple-400 font-mono flex items-center gap-1.5">
+                  <Cpu className="w-3.5 h-3.5 text-purple-400" />
                   Schema: <code className="text-purple-300 font-bold">{selectedScenario.category}</code>
                 </span>
                 <button
@@ -147,18 +151,18 @@ export function CodeLab() {
               </div>
             </div>
 
-            {/* Right: Execution Output & Data Table */}
+            {/* Right: Execution Output & Data Table with Row Stagger Animation */}
             <div className="lg:col-span-6 p-6 bg-white dark:bg-[#120a26] flex flex-col justify-between space-y-4">
               <div>
                 {/* Stats Bar */}
                 <div className="flex items-center justify-between pb-3 mb-3 border-b border-purple-100 dark:border-purple-900/50">
                   <div className="flex items-center gap-2">
-                    <span className="flex h-2 w-2 relative">
+                    <span className="flex h-2.5 w-2.5 relative">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-sm shadow-emerald-500/50"></span>
                     </span>
-                    <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                      QUERY OK
+                    <span className="text-xs font-mono font-extrabold text-emerald-600 dark:text-emerald-400 tracking-wide">
+                      {isExecuting ? "PROCESSING..." : "QUERY OK (100% MATCH)"}
                     </span>
                   </div>
 
@@ -177,7 +181,7 @@ export function CodeLab() {
                   {selectedScenario.description}
                 </p>
 
-                {/* Output Data Table */}
+                {/* Output Data Table with Staggered Row Animation */}
                 <div className="rounded-2xl border border-purple-200 dark:border-purple-800/60 overflow-hidden shadow-sm bg-purple-50/30 dark:bg-purple-950/20">
                   <div className="overflow-x-auto max-h-56">
                     <table className="w-full text-left text-xs font-mono">
@@ -190,16 +194,23 @@ export function CodeLab() {
                           ))}
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-purple-100 dark:divide-purple-900/40 text-purple-950 dark:text-purple-200">
+                      <tbody
+                        key={`${selectedScenario.id}-${executionCount}`}
+                        className="divide-y divide-purple-100 dark:divide-purple-900/40 text-purple-950 dark:text-purple-200"
+                      >
                         {selectedScenario.results.map((row, idx) => (
                           <tr
                             key={idx}
-                            className="hover:bg-purple-100/50 dark:hover:bg-purple-900/30 transition-colors"
+                            style={{
+                              animation: `fadeInUp 0.35s ease-out forwards`,
+                              animationDelay: `${idx * 80}ms`,
+                            }}
+                            className="hover:bg-purple-100/50 dark:hover:bg-purple-900/30 transition-colors animate-in fade-in slide-in-from-bottom-2 duration-300 fill-mode-both"
                           >
                             {selectedScenario.columns.map((col) => (
                               <td
                                 key={col}
-                                className="py-2 px-3 whitespace-nowrap text-[11px]"
+                                className="py-2.5 px-3 whitespace-nowrap text-[11px]"
                               >
                                 {String(row[col])}
                               </td>

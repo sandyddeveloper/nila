@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
+import { TechMarquee } from "@/components/TechMarquee";
 import { DataSandbox } from "@/components/DataSandbox";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { CodeLab } from "@/components/CodeLab";
@@ -29,6 +30,9 @@ export default function HomePage() {
 
       {/* Hero Overview */}
       <HeroSection onOpenResume={() => setIsResumeOpen(true)} />
+
+      {/* Core Stack Continuous Auto-Scrolling Tech Marquee */}
+      <TechMarquee />
 
       {/* Interactive Live Data Sandbox Simulator */}
       <DataSandbox />

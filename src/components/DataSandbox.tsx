@@ -23,6 +23,7 @@ import {
   YAxis,
   Legend,
 } from "recharts";
+import { BorderBeam } from "./BorderBeam";
 import { formatCurrency, formatNumber } from "@/lib/utils";
 
 interface PresetScenario {
@@ -382,20 +383,28 @@ export function DataSandbox() {
             </div>
 
             {/* Interactive Projection Chart */}
-            <div className="glass-card p-6 rounded-3xl border border-purple-200 dark:border-purple-800/80 shadow-2xl purple-glow">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 mb-3 border-b border-purple-100 dark:border-purple-900/50 gap-2">
-                <div>
-                  <h4 className="text-sm font-bold text-purple-950 dark:text-white">
-                    12-Month Annual Run-Rate (ARR) Trajectory Comparison ($k)
-                  </h4>
-                  <p className="text-xs text-purple-600 dark:text-purple-400">
-                    Live dynamic projection showing baseline vs analytics-optimized retention
-                  </p>
+            <div className="relative glass-card p-6 rounded-3xl border border-purple-200 dark:border-purple-800/80 shadow-2xl purple-glow overflow-hidden">
+              <BorderBeam
+                size={340}
+                duration={9}
+                colorFrom="#c084fc"
+                colorTo="#9333ea"
+              />
+
+              <div className="relative z-10 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-purple-100 dark:border-purple-900/50 gap-2">
+                  <div>
+                    <h4 className="text-sm font-bold text-purple-950 dark:text-white">
+                      12-Month Annual Run-Rate (ARR) Trajectory Comparison ($k)
+                    </h4>
+                    <p className="text-xs text-purple-600 dark:text-purple-400">
+                      Live dynamic projection showing baseline vs analytics-optimized retention
+                    </p>
+                  </div>
+                  <div className="text-xs font-extrabold px-3 py-1 rounded-xl bg-purple-100 dark:bg-purple-900/80 text-purple-800 dark:text-purple-200 self-start sm:self-auto">
+                    +{churnReduction}% Optimization
+                  </div>
                 </div>
-                <div className="text-xs font-extrabold px-3 py-1 rounded-xl bg-purple-100 dark:bg-purple-900/80 text-purple-800 dark:text-purple-200 self-start sm:self-auto">
-                  +{churnReduction}% Optimization
-                </div>
-              </div>
 
               <div className="h-64 w-full">
                 <ResponsiveContainer width="100%" height="100%">
@@ -487,6 +496,7 @@ export function DataSandbox() {
           </div>
         </div>
       </div>
+    </div>
     </section>
   );
 }

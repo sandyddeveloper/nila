@@ -23,6 +23,19 @@ import {
   YAxis,
 } from "recharts";
 import { AnimatedCounter } from "./AnimatedCounter";
+import { TypewriterRoles } from "./TypewriterRoles";
+import {
+  PythonLogo,
+  PowerBILogo,
+  ExcelLogo,
+  PostgreSQLLogo,
+  MySQLLogo,
+  PandasLogo,
+  DaxLogo,
+  PowerQueryLogo,
+  DjangoLogo,
+  GitLogo,
+} from "./TechLogos";
 
 const heroChartPresets = {
   impact: {
@@ -99,9 +112,19 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
 
             {/* Main Headline */}
             <div className="space-y-2">
-              <h2 className="text-sm sm:text-base font-bold tracking-widest text-purple-600 dark:text-purple-400 uppercase">
-                Hello, I&apos;m {PERSONAL_INFO.name}
-              </h2>
+              <div className="flex flex-wrap items-center gap-2 text-sm sm:text-base font-bold tracking-wider text-purple-600 dark:text-purple-400 uppercase">
+                <span>Hello, I&apos;m {PERSONAL_INFO.name}</span>
+                <span className="text-purple-400 dark:text-purple-500">•</span>
+                <TypewriterRoles
+                  roles={[
+                    "Data Analyst",
+                    "Power BI & DAX Specialist",
+                    "SQL Data Wrangler",
+                    "Python Analytics",
+                  ]}
+                  className="text-purple-800 dark:text-purple-300 font-extrabold normal-case tracking-normal"
+                />
+              </div>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-purple-950 dark:text-white leading-[1.12]">
                 Transforming{" "}
                 <span className="bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-500 dark:from-purple-400 dark:via-purple-300 dark:to-indigo-300 bg-clip-text text-transparent">
@@ -158,24 +181,6 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
                 <span>Resume (CV)</span>
               </button>
             </div>
-
-            {/* Quick Tech Badge Strip */}
-            <div className="pt-4 border-t border-purple-200/70 dark:border-purple-900/40 flex flex-wrap items-center gap-2 text-xs text-purple-800 dark:text-purple-300 font-medium">
-              <span className="font-semibold text-purple-950 dark:text-purple-100 mr-1 flex items-center gap-1">
-                <Database className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-                Core Stack:
-              </span>
-              {["Python", "Pandas", "SQL", "MySQL", "PostgreSQL", "Power BI", "DAX", "Power Query", "Excel (VLOOKUP, Macros)", "Django", "Git"].map(
-                (tool) => (
-                  <span
-                    key={tool}
-                    className="px-2.5 py-1 rounded-lg bg-purple-100/70 dark:bg-purple-950/50 border border-purple-200 dark:border-purple-800/60 text-purple-900 dark:text-purple-200 text-[11px]"
-                  >
-                    {tool}
-                  </span>
-                )
-              )}
-            </div>
           </div>
 
           {/* Right Column: Interactive Real-Time Analytical Metric Widget */}
@@ -205,31 +210,28 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
               <div className="flex p-1 mb-4 rounded-xl bg-purple-100/60 dark:bg-purple-950/60 border border-purple-200/50 dark:border-purple-800/40 text-[11px] font-semibold">
                 <button
                   onClick={() => setActiveTab("impact")}
-                  className={`flex-1 py-1.5 rounded-lg transition-all ${
-                    activeTab === "impact"
+                  className={`flex-1 py-1.5 rounded-lg transition-all ${activeTab === "impact"
                       ? "bg-white dark:bg-purple-800 text-purple-900 dark:text-white shadow-sm font-bold"
                       : "text-purple-700 dark:text-purple-300 hover:text-purple-950 dark:hover:text-white"
-                  }`}
+                    }`}
                 >
                   Revenue ROI
                 </button>
                 <button
                   onClick={() => setActiveTab("accuracy")}
-                  className={`flex-1 py-1.5 rounded-lg transition-all ${
-                    activeTab === "accuracy"
+                  className={`flex-1 py-1.5 rounded-lg transition-all ${activeTab === "accuracy"
                       ? "bg-white dark:bg-purple-800 text-purple-900 dark:text-white shadow-sm font-bold"
                       : "text-purple-700 dark:text-purple-300 hover:text-purple-950 dark:hover:text-white"
-                  }`}
+                    }`}
                 >
                   Model Accuracy
                 </button>
                 <button
                   onClick={() => setActiveTab("automation")}
-                  className={`flex-1 py-1.5 rounded-lg transition-all ${
-                    activeTab === "automation"
+                  className={`flex-1 py-1.5 rounded-lg transition-all ${activeTab === "automation"
                       ? "bg-white dark:bg-purple-800 text-purple-900 dark:text-white shadow-sm font-bold"
                       : "text-purple-700 dark:text-purple-300 hover:text-purple-950 dark:hover:text-white"
-                  }`}
+                    }`}
                 >
                   Hours Saved
                 </button>
@@ -311,8 +313,47 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
           </div>
         </div>
 
+        {/* Full-Width Core Stack Showcase - Zero Scrollbar, 100% Visible & Clear */}
+        <div className="mt-12 glass-card p-4 sm:p-5 rounded-3xl border border-purple-200 dark:border-purple-800/70 shadow-lg purple-glow">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5">
+            {/* Label */}
+            <div className="flex items-center gap-2.5 shrink-0 pb-2 lg:pb-0 lg:pr-4 border-b lg:border-b-0 lg:border-r border-purple-200 dark:border-purple-800/70">
+              <div className="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center shadow-md">
+                <Database className="w-4 h-4" />
+              </div>
+              <span className="font-extrabold text-xs sm:text-sm text-purple-950 dark:text-purple-100 whitespace-nowrap">
+                Core Tech Stack
+              </span>
+            </div>
+
+            {/* All 10 Tech Badges - Full Width Flex Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-5 lg:flex lg:flex-1 lg:items-center lg:justify-between gap-2 sm:gap-2.5">
+              {[
+                { name: "Python", Icon: PythonLogo },
+                { name: "Power BI", Icon: PowerBILogo },
+                { name: "SQL", Icon: PostgreSQLLogo },
+                { name: "Excel", Icon: ExcelLogo },
+                { name: "Pandas", Icon: PandasLogo },
+                { name: "DAX", Icon: DaxLogo },
+                { name: "MySQL", Icon: MySQLLogo },
+                { name: "Power Query", Icon: PowerQueryLogo },
+                { name: "Django", Icon: DjangoLogo },
+                { name: "Git", Icon: GitLogo },
+              ].map(({ name, Icon }) => (
+                <div
+                  key={name}
+                  className="px-2.5 sm:px-3 py-2 rounded-2xl bg-purple-50/90 dark:bg-purple-950/70 border border-purple-200/80 dark:border-purple-800/80 text-purple-950 dark:text-purple-100 text-xs font-bold flex items-center justify-center lg:justify-start gap-2 hover:scale-105 hover:bg-purple-100 dark:hover:bg-purple-900/60 hover:border-purple-400 dark:hover:border-purple-500 transition-all shadow-xs"
+                >
+                  <Icon className="w-4 h-4 shrink-0" />
+                  <span className="truncate">{name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* 4 Stat KPI Highlights Grid with Smooth Number Counting Animation */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-14">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
           {PERSONAL_INFO.heroStats.map((stat, idx) => (
             <div
               key={idx}

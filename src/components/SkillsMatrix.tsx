@@ -11,12 +11,41 @@ import {
   Layers,
 } from "lucide-react";
 import { AnimatedCounter } from "./AnimatedCounter";
+import {
+  PythonLogo,
+  PowerBILogo,
+  ExcelLogo,
+  PostgreSQLLogo,
+  MySQLLogo,
+  PandasLogo,
+  DaxLogo,
+  PowerQueryLogo,
+  DjangoLogo,
+  GitLogo,
+  HTMLLogo,
+} from "./TechLogos";
 
 type Skill = (typeof SKILL_CATEGORIES)[0]["skills"][0];
+
+const getSkillLogo = (name: string) => {
+  const lower = name.toLowerCase();
+  if (lower.includes("python")) return PythonLogo;
+  if (lower.includes("sql") || lower.includes("postgresql") || lower.includes("mysql")) return PostgreSQLLogo;
+  if (lower.includes("power bi")) return PowerBILogo;
+  if (lower.includes("power query")) return PowerQueryLogo;
+  if (lower.includes("dax")) return DaxLogo;
+  if (lower.includes("excel")) return ExcelLogo;
+  if (lower.includes("pandas")) return PandasLogo;
+  if (lower.includes("django")) return DjangoLogo;
+  if (lower.includes("git")) return GitLogo;
+  if (lower.includes("html") || lower.includes("css")) return HTMLLogo;
+  return null;
+};
 
 function SkillBarItem({ skill }: { skill: Skill }) {
   const [isVisible, setIsVisible] = useState(false);
   const barRef = useRef<HTMLDivElement | null>(null);
+  const SkillIcon = getSkillLogo(skill.name);
 
   useEffect(() => {
     const el = barRef.current;
@@ -38,8 +67,13 @@ function SkillBarItem({ skill }: { skill: Skill }) {
   return (
     <div ref={barRef} className="space-y-2 group">
       <div className="flex justify-between items-center text-xs">
-        <span className="font-bold text-purple-950 dark:text-white flex items-center gap-1.5">
-          {skill.name}
+        <span className="font-bold text-purple-950 dark:text-white flex items-center gap-2">
+          {SkillIcon && (
+            <span className="w-5 h-5 rounded-md bg-purple-50 dark:bg-purple-950/70 border border-purple-100 dark:border-purple-800/60 flex items-center justify-center shrink-0">
+              <SkillIcon className="w-3.5 h-3.5" />
+            </span>
+          )}
+          <span>{skill.name}</span>
           {skill.highlight && (
             <span className="w-1.5 h-1.5 rounded-full bg-purple-500 inline-block animate-pulse" />
           )}

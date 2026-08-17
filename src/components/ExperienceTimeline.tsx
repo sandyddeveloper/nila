@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { CAREER_EXPERIENCES } from "@/data/portfolioData";
 import { RESUME_DATA } from "@/data/resumeData";
 import {
@@ -11,23 +11,49 @@ import {
   MapPin,
   CheckCircle2,
   Award,
+  Building2,
 } from "lucide-react";
 
 export function ExperienceTimeline() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const timelineRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const el = timelineRef.current;
+      if (!el) return;
+
+      const rect = el.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calculate how much of the timeline is scrolled through
+      const totalHeight = rect.height;
+      const currentScroll = windowHeight / 2 - rect.top;
+
+      const progress = Math.min(Math.max(currentScroll / totalHeight, 0), 1);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section id="experience" className="py-24 relative bg-radial-gradient">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
+        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-100 dark:bg-purple-900/60 border border-purple-300 dark:border-purple-800 text-purple-900 dark:text-purple-200">
-            <Briefcase className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-            <span>Career Journey & Track Record</span>
+            <Building2 className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
+            <span>Career Milestones &amp; Credentials</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-purple-950 dark:text-white tracking-tight">
-            Work Experience & Education
+            Work Experience &amp; Education
           </h2>
           <p className="text-sm sm:text-base text-purple-900/70 dark:text-purple-300/80">
-            Professional data QA & conversion experience at HTC Global Services, combined with computer applications academic background.
+            Professional data QA &amp; conversion experience at HTC Global Services, combined with computer applications academic background.
           </p>
         </div>
 
@@ -39,11 +65,23 @@ export function ExperienceTimeline() {
               <span>Professional Experience</span>
             </h3>
 
-            <div className="relative pl-6 sm:pl-8 border-l-2 border-purple-200 dark:border-purple-800 space-y-10">
+            {/* Scroll-Tracked Timeline Line */}
+            <div ref={timelineRef} className="relative pl-6 sm:pl-8 space-y-10">
+              {/* Background Track Line */}
+              <div className="absolute left-[3px] sm:left-[5px] top-0 bottom-0 w-0.5 bg-purple-200 dark:bg-purple-900/50" />
+
+              {/* Glowing Active Fill Progress Line */}
+              <div
+                className="absolute left-[3px] sm:left-[5px] top-0 w-0.5 bg-gradient-to-b from-purple-600 via-purple-500 to-indigo-500 shadow-[0_0_10px_#c084fc] transition-all duration-150 ease-out"
+                style={{ height: `${scrollProgress * 100}%` }}
+              />
+
               {CAREER_EXPERIENCES.map((exp, idx) => (
                 <div key={idx} className="relative group">
-                  {/* Timeline bullet dot */}
-                  <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-purple-600 border-4 border-white dark:border-[#090514] shadow-md group-hover:scale-125 transition-transform" />
+                  {/* Timeline bullet dot with glowing pulse ring */}
+                  <div className="absolute -left-[30px] sm:-left-[38px] top-1.5 w-4 h-4 rounded-full bg-purple-600 border-4 border-white dark:border-[#090514] shadow-md group-hover:scale-125 transition-transform z-10">
+                    <span className="animate-ping absolute -inset-1 rounded-full bg-purple-400 opacity-60 group-hover:block" />
+                  </div>
 
                   {/* Card */}
                   <div className="glass-card rounded-3xl p-6 sm:p-7 border border-purple-200 dark:border-purple-800/70 shadow-lg hover:shadow-2xl hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 space-y-4">
@@ -77,7 +115,7 @@ export function ExperienceTimeline() {
                     {/* Achievements */}
                     <div className="space-y-2">
                       <div className="text-xs font-bold uppercase tracking-wider text-purple-800 dark:text-purple-300">
-                        Key Responsibilities & Quality Deliverables
+                        Key Responsibilities &amp; Quality Deliverables
                       </div>
                       <ul className="space-y-2 text-xs sm:text-sm text-purple-950/90 dark:text-purple-100">
                         {exp.achievements.map((ach, aIdx) => (
@@ -129,8 +167,8 @@ export function ExperienceTimeline() {
                     <div className="text-xs font-semibold text-purple-600 dark:text-purple-400">
                       {edu.institution}
                     </div>
-                    <div className="text-[11px] text-purple-700 dark:text-purple-300">
-                      {edu.period}
+                    <div className="text-[11px] text-purple-700 dark:text-purple-400">
+                      {edu.period} • {edu.coursework}
                     </div>
                   </div>
                 ))}
@@ -144,15 +182,14 @@ export function ExperienceTimeline() {
                 <span>Core Competencies</span>
               </h3>
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap gap-2">
                 {RESUME_DATA.coreCompetencies.map((comp, idx) => (
-                  <div
+                  <span
                     key={idx}
-                    className="p-2.5 rounded-xl bg-purple-50/70 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-800/50 text-xs font-semibold text-purple-900 dark:text-purple-200 flex items-center gap-2"
+                    className="px-3 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/70 border border-purple-200 dark:border-purple-800 text-xs font-medium text-purple-900 dark:text-purple-200"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-purple-600 dark:bg-purple-400" />
-                    <span>{comp}</span>
-                  </div>
+                    {comp}
+                  </span>
                 ))}
               </div>
             </div>

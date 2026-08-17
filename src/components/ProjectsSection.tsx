@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { PROJECTS, Project } from "@/data/portfolioData";
 import { ProjectModal } from "./ProjectModal";
+import { BorderBeam } from "./BorderBeam";
 import {
   FolderGit2,
   Sparkles,
@@ -86,13 +87,22 @@ export function ProjectsSection() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, pIdx) => (
             <div
               key={project.id}
               onClick={() => setActiveProject(project)}
-              className="glass-card rounded-3xl p-6 border border-purple-200 dark:border-purple-800/70 shadow-lg hover:shadow-2xl hover:border-purple-400 dark:hover:border-purple-500/80 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between cursor-pointer group"
+              className="relative glass-card rounded-3xl p-6 border border-purple-200 dark:border-purple-800/70 shadow-lg hover:shadow-2xl hover:border-purple-400 dark:hover:border-purple-500/80 transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between cursor-pointer group overflow-hidden"
             >
-              <div className="space-y-4">
+              {/* Glowing animated border beam on featured project cards */}
+              <BorderBeam
+                size={280}
+                duration={7}
+                delay={pIdx * 3.5}
+                colorFrom="#c084fc"
+                colorTo="#9333ea"
+              />
+
+              <div className="space-y-4 relative z-10">
                 {/* Header Pills */}
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-purple-100 dark:bg-purple-900/60 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
