@@ -34,6 +34,9 @@ export default function HomePage() {
       {/* Core Stack Continuous Auto-Scrolling Tech Marquee */}
       <TechMarquee />
 
+      {/* Career Experience & Education Timeline */}
+      <ExperienceTimeline />
+
       {/* Interactive Live Data Sandbox Simulator */}
       <DataSandbox />
 
@@ -49,8 +52,6 @@ export default function HomePage() {
       {/* ROI & Business Value Calculator */}
       <ValueCalculator />
 
-      {/* Career Experience & Education Timeline */}
-      <ExperienceTimeline />
 
       {/* Verified Professional Certifications */}
       <Certifications />
