@@ -22,6 +22,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { AnimatedCounter } from "./AnimatedCounter";
 
 const heroChartPresets = {
   impact: {
@@ -310,7 +311,7 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
           </div>
         </div>
 
-        {/* 4 Stat KPI Highlights Grid */}
+        {/* 4 Stat KPI Highlights Grid with Smooth Number Counting Animation */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-14">
           {PERSONAL_INFO.heroStats.map((stat, idx) => (
             <div
@@ -318,7 +319,11 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
               className="glass-card p-5 rounded-2xl border border-purple-200 dark:border-purple-800/60 shadow-md hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-300 group hover:-translate-y-1"
             >
               <div className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-600 dark:from-purple-300 dark:via-purple-200 dark:to-indigo-300 bg-clip-text text-transparent group-hover:scale-105 transition-transform">
-                {stat.value}
+                <AnimatedCounter
+                  value={stat.value}
+                  duration={2200}
+                  className="inline-block"
+                />
               </div>
               <div className="text-xs sm:text-sm font-bold text-purple-950 dark:text-white mt-1">
                 {stat.label}

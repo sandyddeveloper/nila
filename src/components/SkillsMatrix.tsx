@@ -1,17 +1,85 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { SKILL_CATEGORIES } from "@/data/portfolioData";
 import {
   Code,
   BarChart3,
   Database,
   BrainCircuit,
-  Sparkles,
-  CheckCircle2,
   Cpu,
   Layers,
 } from "lucide-react";
+import { AnimatedCounter } from "./AnimatedCounter";
+
+type Skill = (typeof SKILL_CATEGORIES)[0]["skills"][0];
+
+function SkillBarItem({ skill }: { skill: Skill }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const barRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = barRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={barRef} className="space-y-2 group">
+      <div className="flex justify-between items-center text-xs">
+        <span className="font-bold text-purple-950 dark:text-white flex items-center gap-1.5">
+          {skill.name}
+          {skill.highlight && (
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 inline-block animate-pulse" />
+          )}
+        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/60 text-purple-800 dark:text-purple-300">
+            {skill.experience}
+          </span>
+          <span className="font-mono font-extrabold text-purple-700 dark:text-purple-300 w-11 text-right">
+            {isVisible ? (
+              <AnimatedCounter target={skill.level} suffix="%" duration={1600} />
+            ) : (
+              "0%"
+            )}
+          </span>
+        </div>
+      </div>
+
+      {/* Progress Track */}
+      <div className="w-full h-2 rounded-full bg-purple-100 dark:bg-purple-950 overflow-hidden relative">
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-500 transition-all duration-1000 ease-out shadow-sm"
+          style={{ width: isVisible ? `${skill.level}%` : "0%" }}
+        />
+      </div>
+
+      {/* Skill Tags */}
+      <div className="flex flex-wrap gap-1.5 pt-0.5">
+        {skill.tags.map((tag) => (
+          <span
+            key={tag}
+            className="px-2 py-0.5 text-[10px] rounded-md bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-100 dark:border-purple-800/40"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export function SkillsMatrix() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
@@ -35,13 +103,13 @@ export function SkillsMatrix() {
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-100 dark:bg-purple-900/60 border border-purple-300 dark:border-purple-800 text-purple-900 dark:text-purple-200">
             <Cpu className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
-            <span>Technical Mastery & Tooling</span>
+            <span>Technical Mastery &amp; Tooling</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-purple-950 dark:text-white tracking-tight">
             Data Analytics Skills Matrix
           </h2>
           <p className="text-sm sm:text-base text-purple-900/70 dark:text-purple-300/80">
-            A comprehensive overview of programming languages, statistical frameworks, BI platforms, and cloud data warehouses utilized in production environments.
+            A comprehensive overview of programming languages, statistical frameworks, BI platforms, and relational databases utilized in production environments.
           </p>
         </div>
 
@@ -96,47 +164,10 @@ export function SkillsMatrix() {
                   </div>
                 </div>
 
-                {/* Skills Progress Bars */}
+                {/* Skills Progress Bars with 0 to Target% Animation */}
                 <div className="space-y-5">
                   {cat.skills.map((skill) => (
-                    <div key={skill.name} className="space-y-2">
-                      <div className="flex justify-between items-center text-xs">
-                        <span className="font-bold text-purple-950 dark:text-white flex items-center gap-1.5">
-                          {skill.name}
-                          {skill.highlight && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 inline-block" />
-                          )}
-                        </span>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/60 text-purple-800 dark:text-purple-300">
-                            {skill.experience}
-                          </span>
-                          <span className="font-mono font-bold text-purple-700 dark:text-purple-300">
-                            {skill.level}%
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Progress Track */}
-                      <div className="w-full h-2 rounded-full bg-purple-100 dark:bg-purple-950 overflow-hidden">
-                        <div
-                          className="h-full rounded-full bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-500 transition-all duration-1000"
-                          style={{ width: `${skill.level}%` }}
-                        />
-                      </div>
-
-                      {/* Skill Tags */}
-                      <div className="flex flex-wrap gap-1.5 pt-0.5">
-                        {skill.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-0.5 text-[10px] rounded-md bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border border-purple-100 dark:border-purple-800/40"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                    <SkillBarItem key={skill.name} skill={skill} />
                   ))}
                 </div>
               </div>
