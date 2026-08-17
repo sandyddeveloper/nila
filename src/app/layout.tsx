@@ -39,6 +39,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Indhu S" }, { name: "Santhosh RJ K" }],
   creator: "Santhosh Raj K",
   publisher: "Santhosh Raj K",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   openGraph: {
     title: "Indhu S | Data Analysis Portfolio",
     description: "Data Cleaning, SQL Modeling, Python Analytics & Power BI Dashboards.",

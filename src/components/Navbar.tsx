@@ -73,8 +73,13 @@ export function Navbar({ onOpenResume }: NavbarProps) {
             href="#hero"
             className="flex items-center gap-3 group focus:outline-none"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 flex items-center justify-center text-white shadow-md shadow-purple-600/30 group-hover:scale-105 transition-transform duration-300">
-              <BarChart2 className="w-5 h-5 text-white animate-pulse" />
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-md shadow-purple-600/30 group-hover:scale-105 transition-transform duration-300">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/icon.svg"
+                alt="INDHU S Logo"
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <div className="flex items-center gap-2">

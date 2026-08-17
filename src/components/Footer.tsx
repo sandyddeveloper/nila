@@ -23,8 +23,13 @@ export function Footer() {
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-600 to-indigo-700 text-white flex items-center justify-center shadow-md">
-                <BarChart2 className="w-4 h-4" />
+              <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-md">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/icon.svg"
+                  alt="INDHU S Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-purple-900 via-purple-700 to-purple-600 dark:from-white dark:via-purple-200 dark:to-purple-400 bg-clip-text text-transparent">
                 {PERSONAL_INFO.name}
