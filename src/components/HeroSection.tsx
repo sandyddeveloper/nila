@@ -125,7 +125,7 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
                   className="text-purple-800 dark:text-purple-300 font-extrabold normal-case tracking-normal"
                 />
               </div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-purple-950 dark:text-white leading-[1.12]">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-purple-950 dark:text-white leading-tight">
                 Transforming{" "}
                 <span className="bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-500 dark:from-purple-400 dark:via-purple-300 dark:to-indigo-300 bg-clip-text text-transparent">
                   Raw Datasets
@@ -136,7 +136,7 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
 
             {/* Sub-paragraph */}
             <p className="text-base sm:text-lg text-purple-900/80 dark:text-purple-200/80 max-w-2xl leading-relaxed">
-              Data Analyst with proven experience in{" "}
+              Data Analyst proficient in{" "}
               <strong className="font-semibold text-purple-950 dark:text-white">
                 Python (Pandas, NumPy, Matplotlib)
               </strong>
@@ -151,8 +151,8 @@ export function HeroSection({ onOpenResume }: HeroSectionProps) {
               , and{" "}
               <strong className="font-semibold text-purple-950 dark:text-white">
                 Advanced Excel &amp; Data Validation
-              </strong>
-              . Experienced in high-accuracy data conversion, ETL pipelines, and executive KPI reporting at HTC Global Services.
+              </strong>{" "}
+              — developed through personal projects and coursework. Professional experience includes high-accuracy data conversion and quality assurance at HTC Global Services.
             </p>
 
             {/* CTAs */}

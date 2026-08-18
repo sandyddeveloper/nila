@@ -93,7 +93,7 @@ export const PERSONAL_INFO = {
   github: "https://github.com/indhu-16/",
   website: "https://indhu-puce.vercel.app/",
   resumePdf: "/my_resume (1).pdf",
-  bio: "Motivated and detail-oriented Data Analyst with strong technical expertise in Python (Pandas, NumPy, Matplotlib), SQL (MySQL, PostgreSQL), Advanced Excel, Power BI (DAX, Power Query), and Django. Proven experience in data migration, validation, ETL data pipelines, and executive KPI reporting at HTC Global Services.",
+  bio: "Data Analyst proficient in Python (Pandas, NumPy, Matplotlib), SQL (MySQL, PostgreSQL), Power BI (DAX, Power Query), and Advanced Excel & Data Validation — developed through personal projects and coursework. Professional experience includes high-accuracy data conversion and quality assurance at HTC Global Services.",
   availability: "Open to Full-time Data Analyst & BI Roles",
   heroStats: [
     { value: "100%", label: "Data Quality & Migration Accuracy", subtext: "HTC Global Services QA" },

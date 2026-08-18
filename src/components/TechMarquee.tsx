@@ -165,9 +165,9 @@ export function TechMarquee() {
   return (
     <section className="py-20 relative overflow-hidden bg-purple-50/40 dark:bg-purple-950/20 border-y border-purple-200/60 dark:border-purple-900/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center space-y-3">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-purple-100 dark:bg-purple-900/60 border border-purple-300 dark:border-purple-800 text-purple-900 dark:text-purple-200">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-purple-100 dark:bg-purple-900/60 border border-purple-300 dark:border-purple-800 text-purple-900 dark:text-purple-200">
           <Cpu className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-          <span>Core Stack &amp; Enterprise Tooling</span>
+          <span>Core Stack</span>
         </div>
         <h3 className="text-3xl sm:text-4xl font-extrabold text-purple-950 dark:text-white tracking-tight">
           Technologies &amp; Analytical Frameworks
